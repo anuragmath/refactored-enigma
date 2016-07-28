@@ -71,6 +71,9 @@ public class LoanProductData {
     private final BigDecimal principal;
     private final BigDecimal minPrincipal;
     private final BigDecimal maxPrincipal;
+    private final BigDecimal downpayment;
+    private final BigDecimal minDownpayment;
+    private final BigDecimal maxDownpayment;
     private final Integer numberOfRepayments;
     private final Integer minNumberOfRepayments;
     private final Integer maxNumberOfRepayments;
@@ -187,6 +190,9 @@ public class LoanProductData {
         final BigDecimal principal = null;
         final BigDecimal minPrincipal = null;
         final BigDecimal maxPrincipal = null;
+        final BigDecimal downpayment = null;
+        final BigDecimal minDownpayment = null;
+        final BigDecimal maxDownpayment = null;
         final BigDecimal tolerance = null;
         final Integer numberOfRepayments = null;
         final Integer minNumberOfRepayments = null;
@@ -250,7 +256,8 @@ public class LoanProductData {
         final Integer installmentAmountInMultiplesOf = null;
         final LoanProductConfigurableAttributes loanProductConfigurableAttributes = null;
 
-        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, tolerance,
+        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, downpayment,
+        		minDownpayment, maxDownpayment, tolerance,
                 numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, repaymentEvery, interestRatePerPeriod,
                 minInterestRatePerPeriod, maxInterestRatePerPeriod, annualInterestRate, repaymentFrequencyType, interestRateFrequencyType,
                 amortizationType, interestType, interestCalculationPeriodType, allowPartialPeriodInterestCalcualtion, fundId, fundName,
@@ -273,6 +280,9 @@ public class LoanProductData {
         final BigDecimal principal = null;
         final BigDecimal minPrincipal = null;
         final BigDecimal maxPrincipal = null;
+        final BigDecimal downpayment = null;
+        final BigDecimal minDownpayment = null;
+        final BigDecimal maxDownpayment = null;
         final BigDecimal tolerance = null;
         final Integer numberOfRepayments = null;
         final Integer minNumberOfRepayments = null;
@@ -338,7 +348,8 @@ public class LoanProductData {
         final Integer installmentAmountInMultiplesOf = null;
         final LoanProductConfigurableAttributes loanProductConfigurableAttributes = null;
 
-        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, tolerance,
+        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, downpayment,
+        		minDownpayment, maxDownpayment, tolerance,
                 numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, repaymentEvery, interestRatePerPeriod,
                 minInterestRatePerPeriod, maxInterestRatePerPeriod, annualInterestRate, repaymentFrequencyType, interestRateFrequencyType,
                 amortizationType, interestType, interestCalculationPeriodType, allowPartialPeriodInterestCalcualtion, fundId, fundName,
@@ -364,6 +375,9 @@ public class LoanProductData {
         final BigDecimal principal = null;
         final BigDecimal minPrincipal = null;
         final BigDecimal maxPrincipal = null;
+        final BigDecimal downpayment = null;
+        final BigDecimal minDownpayment = null;
+        final BigDecimal maxDownpayment = null;
         final BigDecimal tolerance = null;
         final Integer numberOfRepayments = null;
         final Integer minNumberOfRepayments = null;
@@ -433,7 +447,8 @@ public class LoanProductData {
         final Integer installmentAmountInMultiplesOf = null;
         final LoanProductConfigurableAttributes loanProductConfigurableAttributes = null;
 
-        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, tolerance,
+        return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, downpayment,
+        		minDownpayment, maxDownpayment, tolerance,
                 numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, repaymentEvery, interestRatePerPeriod,
                 minInterestRatePerPeriod, maxInterestRatePerPeriod, annualInterestRate, repaymentFrequencyType, interestRateFrequencyType,
                 amortizationType, interestType, interestCalculationPeriodType, allowPartialPeriodInterestCalcualtion, fundId, fundName,
@@ -462,7 +477,8 @@ public class LoanProductData {
     }
 
     public LoanProductData(final Long id, final String name, final String shortName, final String description, final CurrencyData currency,
-            final BigDecimal principal, final BigDecimal minPrincipal, final BigDecimal maxPrincipal, final BigDecimal tolerance,
+            final BigDecimal principal, final BigDecimal minPrincipal, final BigDecimal maxPrincipal, final BigDecimal downpayment,
+            final BigDecimal minDownpayment, final BigDecimal maxDownpayment, final BigDecimal tolerance,
             final Integer numberOfRepayments, final Integer minNumberOfRepayments, final Integer maxNumberOfRepayments,
             final Integer repaymentEvery, final BigDecimal interestRatePerPeriod, final BigDecimal minInterestRatePerPeriod,
             final BigDecimal maxInterestRatePerPeriod, final BigDecimal annualInterestRate, final EnumOptionData repaymentFrequencyType,
@@ -494,6 +510,9 @@ public class LoanProductData {
         this.principal = principal;
         this.minPrincipal = minPrincipal;
         this.maxPrincipal = maxPrincipal;
+        this.downpayment = downpayment;
+        this.minDownpayment = minDownpayment;
+        this.maxDownpayment = maxDownpayment;
         this.inArrearsTolerance = tolerance;
         this.numberOfRepayments = numberOfRepayments;
         this.minNumberOfRepayments = minNumberOfRepayments;
@@ -608,6 +627,9 @@ public class LoanProductData {
         this.principal = productData.principal;
         this.minPrincipal = productData.minPrincipal;
         this.maxPrincipal = productData.maxPrincipal;
+        this.downpayment = productData.downpayment;
+        this.minDownpayment = productData.minDownpayment;
+        this.maxDownpayment = productData.maxDownpayment;
         this.inArrearsTolerance = productData.inArrearsTolerance;
         this.numberOfRepayments = productData.numberOfRepayments;
         this.minNumberOfRepayments = productData.minNumberOfRepayments;

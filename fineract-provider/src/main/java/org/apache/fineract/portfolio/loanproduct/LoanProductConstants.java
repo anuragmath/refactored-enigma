@@ -56,6 +56,10 @@ public interface LoanProductConstants {
     public static final String principal = "principal";
     public static final String minPrincipal = "minPrincipal";
     public static final String maxPrincipal = "maxPrincipalValue";
+    
+    public static final String downpayment = "downpayment";
+    public static final String minDownpayment = "minDownpayment";
+    public static final String maxDownpayment = "maxDownpayment";
 
     public static final String interestRatePerPeriod = "interestRatePerPeriod";
     public static final String minInterestRatePerPeriod = "minInterestRatePerPeriod";
