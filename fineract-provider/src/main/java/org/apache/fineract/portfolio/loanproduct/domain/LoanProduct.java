@@ -197,6 +197,10 @@ public class LoanProduct extends AbstractPersistable<Long> {
         final BigDecimal principal = command.bigDecimalValueOfParameterNamed("principal");
         final BigDecimal minPrincipal = command.bigDecimalValueOfParameterNamed("minPrincipal");
         final BigDecimal maxPrincipal = command.bigDecimalValueOfParameterNamed("maxPrincipal");
+        
+        final BigDecimal downpayment = command.bigDecimalValueOfParameterNamed("downpayment");
+        final BigDecimal minDownpayment = command.bigDecimalValueOfParameterNamed("minDownpayment");
+        final BigDecimal maxDownpayment = command.bigDecimalValueOfParameterNamed("maxDownpayment");
 
         final InterestMethod interestMethod = InterestMethod.fromInt(command.integerValueOfParameterNamed("interestType"));
         final InterestCalculationPeriodMethod interestCalculationPeriodMethod = InterestCalculationPeriodMethod.fromInt(command
@@ -325,7 +329,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
                 .integerValueOfParameterNamed(LoanProductConstants.installmentAmountInMultiplesOfParamName);
 
         return new LoanProduct(fund, loanTransactionProcessingStrategy, name, shortName, description, currency, principal, minPrincipal,
-                maxPrincipal, interestRatePerPeriod, minInterestRatePerPeriod, maxInterestRatePerPeriod, interestFrequencyType,
+                maxPrincipal, downpayment, minDownpayment, maxDownpayment, interestRatePerPeriod, minInterestRatePerPeriod, maxInterestRatePerPeriod, interestFrequencyType,
                 annualInterestRate, interestMethod, interestCalculationPeriodMethod, allowPartialPeriodInterestCalcualtion, repaymentEvery,
                 repaymentFrequencyType, numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, graceOnPrincipalPayment,
                 graceOnInterestPayment, graceOnInterestCharged, amortizationMethod, inArrearsTolerance, productCharges, accountingRuleType,
@@ -545,7 +549,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
 
     public LoanProduct(final Fund fund, final LoanTransactionProcessingStrategy transactionProcessingStrategy, final String name,
             final String shortName, final String description, final MonetaryCurrency currency, final BigDecimal defaultPrincipal,
-            final BigDecimal defaultMinPrincipal, final BigDecimal defaultMaxPrincipal,
+            final BigDecimal defaultMinPrincipal, final BigDecimal defaultMaxPrincipal, final BigDecimal defaultDownpayment, final BigDecimal defaultMinDownpayment, final BigDecimal defaultMaxDownpayment, 
             final BigDecimal defaultNominalInterestRatePerPeriod, final BigDecimal defaultMinNominalInterestRatePerPeriod,
             final BigDecimal defaultMaxNominalInterestRatePerPeriod, final PeriodFrequencyType interestPeriodFrequencyType,
             final BigDecimal defaultAnnualNominalInterestRate, final InterestMethod interestMethod,
@@ -604,7 +608,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
 
         this.loanProductRelatedDetail.validateRepaymentPeriodWithGraceSettings();
 
-        this.loanProductMinMaxConstraints = new LoanProductMinMaxConstraints(defaultMinPrincipal, defaultMaxPrincipal,
+        this.loanProductMinMaxConstraints = new LoanProductMinMaxConstraints(defaultMinPrincipal, defaultMaxPrincipal, defaultMinDownpayment, defaultMaxDownpayment,
                 defaultMinNominalInterestRatePerPeriod, defaultMaxNominalInterestRatePerPeriod, defaultMinNumberOfInstallments,
                 defaultMaxNumberOfInstallments);
 
@@ -1093,7 +1097,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
         // If all min and max fields are null then loanProductMinMaxConstraints
         // initialising to null
         // Reset LoanProductMinMaxConstraints with null values.
-        this.loanProductMinMaxConstraints = this.loanProductMinMaxConstraints == null ? new LoanProductMinMaxConstraints(null, null, null,
+        this.loanProductMinMaxConstraints = this.loanProductMinMaxConstraints == null ? new LoanProductMinMaxConstraints(null, null, null, null, null,
                 null, null, null) : this.loanProductMinMaxConstraints;
         return this.loanProductMinMaxConstraints;
     }

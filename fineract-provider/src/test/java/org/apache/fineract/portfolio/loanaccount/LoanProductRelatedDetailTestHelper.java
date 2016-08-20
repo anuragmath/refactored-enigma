@@ -41,6 +41,7 @@ public class LoanProductRelatedDetailTestHelper {
 
         final MonetaryCurrency currency = new MonetaryCurrencyBuilder().withCode("USD").withDigitsAfterDecimal(2).build();
         final BigDecimal defaultPrincipal = BigDecimal.valueOf(Double.valueOf("200000"));
+        final BigDecimal defaultDownpayment = BigDecimal.valueOf(Double.valueOf("100000"));
 
         // 2% per month, 24% per year
         final BigDecimal defaultNominalInterestRatePerPeriod = BigDecimal.valueOf(Double.valueOf("2"));
@@ -65,6 +66,7 @@ public class LoanProductRelatedDetailTestHelper {
     public static LoanProductRelatedDetail createSettingsForEqualInstallmentAmortizationQuarterly() {
         final MonetaryCurrency currency = new MonetaryCurrencyBuilder().withCode("USD").withDigitsAfterDecimal(2).build();
         final BigDecimal defaultPrincipal = BigDecimal.valueOf(Double.valueOf("200000"));
+        final BigDecimal defaultDownpayment = BigDecimal.valueOf(Double.valueOf("100000"));
 
         // 2% per month, 24% per year
         final BigDecimal defaultNominalInterestRatePerPeriod = BigDecimal.valueOf(Double.valueOf("2"));
@@ -90,6 +92,8 @@ public class LoanProductRelatedDetailTestHelper {
 
         final MonetaryCurrency currency = new MonetaryCurrencyBuilder().withCode("USD").withDigitsAfterDecimal(2).build();
         final BigDecimal defaultPrincipal = BigDecimal.valueOf(Double.valueOf("200000"));
+        final BigDecimal defaultDownpayment = BigDecimal.valueOf(Double.valueOf("100000"));
+
 
         // 2% per month, 24% per year
         final BigDecimal defaultNominalInterestRatePerPeriod = BigDecimal.valueOf(Double.valueOf("2"));
@@ -114,6 +118,8 @@ public class LoanProductRelatedDetailTestHelper {
 
         final MonetaryCurrency currency = new MonetaryCurrencyBuilder().withCode("KSH").withDigitsAfterDecimal(0).build();
         final BigDecimal defaultPrincipal = BigDecimal.valueOf(Double.valueOf("15000"));
+        final BigDecimal defaultDownpayment = BigDecimal.valueOf(Double.valueOf("1000"));
+
 
         // 2% per month, 24% per year
         final BigDecimal defaultNominalInterestRatePerPeriod = BigDecimal.valueOf(Double.valueOf("2"));

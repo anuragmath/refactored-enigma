@@ -181,6 +181,7 @@ public class LoanProductReadPlatformServiceImpl implements LoanProductReadPlatfo
             return "lp.id as id, lp.fund_id as fundId, f.name as fundName, lp.loan_transaction_strategy_id as transactionStrategyId, ltps.name as transactionStrategyName, "
                     + "lp.name as name, lp.short_name as shortName, lp.description as description, "
                     + "lp.principal_amount as principal, lp.min_principal_amount as minPrincipal, lp.max_principal_amount as maxPrincipal, lp.currency_code as currencyCode, lp.currency_digits as currencyDigits, lp.currency_multiplesof as inMultiplesOf, "
+                    + "lp.downpayment_amount as downpayment, lp.min_downpayment_amount as minDownpayment, lp.max_downpayment_amount as maxDownpayment, "
                     + "lp.nominal_interest_rate_per_period as interestRatePerPeriod, lp.min_nominal_interest_rate_per_period as minInterestRatePerPeriod, lp.max_nominal_interest_rate_per_period as maxInterestRatePerPeriod, lp.interest_period_frequency_enum as interestRatePerPeriodFreq, "
                     + "lp.annual_nominal_interest_rate as annualInterestRate, lp.interest_method_enum as interestMethod, lp.interest_calculated_in_period_enum as interestCalculationInPeriodMethod,lp.allow_partial_period_interest_calcualtion as allowPartialPeriodInterestCalcualtion, "
                     + "lp.repay_every as repaidEvery, lp.repayment_period_frequency_enum as repaymentPeriodFrequency, lp.number_of_repayments as numberOfRepayments, lp.min_number_of_repayments as minNumberOfRepayments, lp.max_number_of_repayments as maxNumberOfRepayments, "
@@ -255,6 +256,10 @@ public class LoanProductReadPlatformServiceImpl implements LoanProductReadPlatfo
             final BigDecimal principal = rs.getBigDecimal("principal");
             final BigDecimal minPrincipal = rs.getBigDecimal("minPrincipal");
             final BigDecimal maxPrincipal = rs.getBigDecimal("maxPrincipal");
+            
+            final BigDecimal downpayment = rs.getBigDecimal("downpayment");
+            final BigDecimal minDownpayment = rs.getBigDecimal("minDownpayment");
+            final BigDecimal maxDownpayment = rs.getBigDecimal("maxDownpayment");
             final BigDecimal tolerance = rs.getBigDecimal("tolerance");
 
             final Integer numberOfRepayments = JdbcSupport.getInteger(rs, "numberOfRepayments");
@@ -407,7 +412,8 @@ public class LoanProductReadPlatformServiceImpl implements LoanProductReadPlatfo
             final BigDecimal principalThresholdForLastInstallment = rs.getBigDecimal("principalThresholdForLastInstallment");
             final boolean accountMovesOutOfNPAOnlyOnArrearsCompletion = rs.getBoolean("accountMovesOutOfNPAOnlyOnArrearsCompletion");
 
-            return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal, tolerance,
+            return new LoanProductData(id, name, shortName, description, currency, principal, minPrincipal, maxPrincipal,
+            		downpayment, minDownpayment, maxDownpayment, tolerance,
                     numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, repaymentEvery, interestRatePerPeriod,
                     minInterestRatePerPeriod, maxInterestRatePerPeriod, annualInterestRate, repaymentFrequencyType,
                     interestRateFrequencyType, amortizationType, interestType, interestCalculationPeriodType,

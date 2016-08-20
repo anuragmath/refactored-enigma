@@ -63,7 +63,7 @@ public final class LoanProductDataValidator {
      * The parameters supported for this command.
      */
     private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("locale", "dateFormat", "name", "description", "fundId",
-            "currencyCode", "digitsAfterDecimal", "inMultiplesOf", "principal", "minPrincipal", "maxPrincipal", "repaymentEvery",
+            "currencyCode", "digitsAfterDecimal", "inMultiplesOf", "principal", "minPrincipal", "maxPrincipal", "downpayment", "minDownpayment", "maxDownpayment", "repaymentEvery",
             "numberOfRepayments", "minNumberOfRepayments", "maxNumberOfRepayments", "repaymentFrequencyType", "interestRatePerPeriod",
             "minInterestRatePerPeriod", "maxInterestRatePerPeriod", "interestRateFrequencyType", "amortizationType", "interestType",
             "interestCalculationPeriodType", LoanProductConstants.allowPartialPeriodInterestCalcualtionParamName, "inArrearsTolerance",
@@ -191,6 +191,39 @@ public final class LoanProductDataValidator {
             baseDataValidator.reset().parameter("principal").value(principal).notLessThanMin(minPrincipalAmount);
         }
 
+        final BigDecimal downpayment = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("downpayment", element);
+        baseDataValidator.reset().parameter("downpayment").value(downpayment).positiveAmount();
+
+        final String minDownpaymentParameterName = "minDownpayment";
+        BigDecimal minDownpaymentAmount = null;
+        if (this.fromApiJsonHelper.parameterExists(minDownpaymentParameterName, element)) {
+            minDownpaymentAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed(minDownpaymentParameterName, element);
+            baseDataValidator.reset().parameter(minDownpaymentParameterName).value(minDownpaymentAmount).ignoreIfNull().positiveAmount();
+        }
+
+        final String maxDownpaymentParameterName = "maxDownpayment";
+        BigDecimal maxDownpaymentAmount = null;
+        if (this.fromApiJsonHelper.parameterExists(maxDownpaymentParameterName, element)) {
+            maxDownpaymentAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed(maxDownpaymentParameterName, element);
+            baseDataValidator.reset().parameter(maxDownpaymentParameterName).value(maxDownpaymentAmount).ignoreIfNull().positiveAmount();
+        }
+
+        if (maxDownpaymentAmount != null && maxDownpaymentAmount.compareTo(BigDecimal.ZERO) != -1) {
+
+        	
+            if (minDownpaymentAmount != null && minDownpaymentAmount.compareTo(BigDecimal.ZERO) != -1) {
+                baseDataValidator.reset().parameter(maxDownpaymentParameterName).value(maxDownpaymentAmount).notLessThanMin(minDownpaymentAmount);
+                if (minDownpaymentAmount.compareTo(maxDownpaymentAmount) <= 0 && downpayment != null) {
+                    baseDataValidator.reset().parameter("downpayment").value(downpayment)
+                            .inMinAndMaxAmountRange(minDownpaymentAmount, maxDownpaymentAmount);
+                }
+            } else if (downpayment != null) {
+                baseDataValidator.reset().parameter("downpayment").value(downpayment).notGreaterThanMax(maxDownpaymentAmount);
+            }
+        } else if (minDownpaymentAmount != null && minDownpaymentAmount.compareTo(BigDecimal.ZERO) != -1 && downpayment!= null) {
+            baseDataValidator.reset().parameter("downpayment").value(downpayment).notLessThanMin(minDownpaymentAmount);
+        }
+        
         final Integer numberOfRepayments = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("numberOfRepayments", element);
         baseDataValidator.reset().parameter("numberOfRepayments").value(numberOfRepayments).notNull().integerGreaterThanZero();
 

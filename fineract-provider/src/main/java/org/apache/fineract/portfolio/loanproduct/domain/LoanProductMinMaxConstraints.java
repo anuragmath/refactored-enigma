@@ -39,6 +39,12 @@ public class LoanProductMinMaxConstraints {
 
     @Column(name = "max_principal_amount", scale = 6, precision = 19, nullable = true)
     private BigDecimal maxPrincipal;
+    
+    @Column(name = "min_downpayment_amount", scale = 6, precision = 19, nullable = true)
+    private BigDecimal minDownpayment;
+
+    @Column(name = "max_downpayment_amount", scale = 6, precision = 19, nullable = true)
+    private BigDecimal maxDownpayment;
 
     @Column(name = "min_nominal_interest_rate_per_period", scale = 6, precision = 19, nullable = true)
     private BigDecimal minNominalInterestRatePerPeriod;
@@ -53,10 +59,11 @@ public class LoanProductMinMaxConstraints {
     private Integer maxNumberOfRepayments;
 
     public static LoanProductMinMaxConstraints createFrom(final BigDecimal minPrincipal, final BigDecimal maxPrincipal,
+    		final BigDecimal minDownpayment, final BigDecimal maxDownpayment,
             final BigDecimal minNominalInterestRatePerPeriod, final BigDecimal maxNominalInterestRatePerPeriod,
             final Integer minNumberOfRepayments, final Integer maxNumberOfRepayments) {
 
-        return new LoanProductMinMaxConstraints(minPrincipal, maxPrincipal, minNominalInterestRatePerPeriod,
+        return new LoanProductMinMaxConstraints(minPrincipal, maxPrincipal, minDownpayment, maxDownpayment, minNominalInterestRatePerPeriod,
                 maxNominalInterestRatePerPeriod, minNumberOfRepayments, maxNumberOfRepayments);
     }
 
@@ -64,11 +71,14 @@ public class LoanProductMinMaxConstraints {
         //
     }
 
-    public LoanProductMinMaxConstraints(final BigDecimal defaultMinPrincipal, final BigDecimal defaultMaxPrincipal,
+    public LoanProductMinMaxConstraints(final BigDecimal defaultMinPrincipal, final BigDecimal defaultMaxPrincipal, 
+    		final BigDecimal defaultMinDownpayment, final BigDecimal defaultMaxDownpayment,
             final BigDecimal defaultMinNominalInterestRatePerPeriod, final BigDecimal defaultMaxNominalInterestRatePerPeriod,
             final Integer defaultMinNumberOfRepayments, final Integer defaultMaxNumberOfRepayments) {
         this.minPrincipal = defaultMinPrincipal;
         this.maxPrincipal = defaultMaxPrincipal;
+        this.minDownpayment = defaultMinDownpayment;
+        this.maxDownpayment = defaultMaxDownpayment;
         this.minNominalInterestRatePerPeriod = defaultMinNominalInterestRatePerPeriod;
         this.maxNominalInterestRatePerPeriod = defaultMaxNominalInterestRatePerPeriod;
         this.minNumberOfRepayments = defaultMinNumberOfRepayments;
@@ -95,6 +105,22 @@ public class LoanProductMinMaxConstraints {
             actualChanges.put(maxPrincipalParamName, newValue);
             actualChanges.put("locale", localeAsInput);
             this.maxPrincipal = newValue;
+        }
+        
+        final String minDownpaymentParamName = "minDownpayment";
+        if (command.isChangeInBigDecimalParameterNamedWithNullCheck(minDownpaymentParamName, this.minDownpayment)) {
+            final BigDecimal newValue = command.bigDecimalValueOfParameterNamed(minDownpaymentParamName);
+            actualChanges.put(minDownpaymentParamName, newValue);
+            actualChanges.put("locale", localeAsInput);
+            this.minDownpayment = newValue;
+        }
+
+        final String maxDownpaymentParamName = "maxDownpayment";
+        if (command.isChangeInBigDecimalParameterNamedWithNullCheck(maxDownpaymentParamName, this.maxDownpayment)) {
+            final BigDecimal newValue = command.bigDecimalValueOfParameterNamed(maxDownpaymentParamName);
+            actualChanges.put(maxDownpaymentParamName, newValue);
+            actualChanges.put("locale", localeAsInput);
+            this.maxDownpayment = newValue;
         }
 
         final String minNumberOfRepaymentsParamName = "minNumberOfRepayments";
@@ -142,6 +168,14 @@ public class LoanProductMinMaxConstraints {
         return this.maxPrincipal;
     }
 
+    public BigDecimal getMinDownpayment() {
+        return this.minDownpayment;
+    }
+    
+    public BigDecimal getMaxDownpayment() {
+        return this.maxDownpayment;
+    }
+    
     public BigDecimal getMinNominalInterestRatePerPeriod() {
         return this.minNominalInterestRatePerPeriod == null ? null : BigDecimal.valueOf(Double.valueOf(this.minNominalInterestRatePerPeriod
                 .stripTrailingZeros().toString()));

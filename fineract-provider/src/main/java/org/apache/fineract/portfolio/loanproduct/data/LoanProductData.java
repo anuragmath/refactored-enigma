@@ -804,6 +804,18 @@ public class LoanProductData {
     public BigDecimal getMaxPrincipal() {
         return this.maxPrincipal;
     }
+    
+    public BigDecimal getDownpayment() {
+        return this.downpayment;
+    }
+
+    public BigDecimal getMinDownpayment() {
+        return this.minDownpayment;
+    }
+
+    public BigDecimal getMaxDownpayment() {
+        return this.maxDownpayment;
+    }
 
     public BigDecimal getInArrearsTolerance() {
         return this.inArrearsTolerance;

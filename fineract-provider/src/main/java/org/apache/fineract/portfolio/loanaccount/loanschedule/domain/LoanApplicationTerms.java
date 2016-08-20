@@ -78,6 +78,7 @@ public final class LoanApplicationTerms {
     private final boolean allowPartialPeriodInterestCalcualtion;
 
     private Money principal;
+    private Money downpayment;
     private final LocalDate expectedDisbursementDate;
     private final LocalDate repaymentsStartingFromDate;
     private final LocalDate calculatedRepaymentsStartingFromDate;
@@ -1185,6 +1186,9 @@ public final class LoanApplicationTerms {
         return this.principal;
     }
 
+    public Money getDownpayment() {
+    	return this.downpayment;
+    }
     public Money getApprovedPrincipal() {
         return this.approvedPrincipal;
     }
