@@ -600,7 +600,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
                     maximumGapBetweenInstallments);
         }
 
-        this.loanProductRelatedDetail = new LoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod,
+        this.loanProductRelatedDetail = new LoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod,
                 interestPeriodFrequencyType, defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod,
                 considerPartialPeriodInterest, repayEvery, repaymentFrequencyType, defaultNumberOfInstallments, graceOnPrincipalPayment,
                 graceOnInterestPayment, graceOnInterestCharged, amortizationMethod, inArrearsTolerance, graceOnArrearsAgeing,

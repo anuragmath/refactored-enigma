@@ -58,7 +58,7 @@ public class LoanProductRelatedDetailTestHelper {
 
         final BigDecimal inArrearsTolerance = BigDecimal.ZERO;
 
-        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
+        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
                 defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, repayEvery, repaymentFrequencyType,
                 defaultNumberOfRepayments, amortizationMethod, inArrearsTolerance);
     }
@@ -83,7 +83,7 @@ public class LoanProductRelatedDetailTestHelper {
 
         final BigDecimal inArrearsTolerance = BigDecimal.ZERO;
 
-        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
+        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
                 defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, repayEvery, repaymentFrequencyType,
                 defaultNumberOfRepayments, amortizationMethod, inArrearsTolerance);
     }
@@ -109,7 +109,7 @@ public class LoanProductRelatedDetailTestHelper {
 
         final BigDecimal inArrearsTolerance = BigDecimal.ZERO;
 
-        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
+        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
                 defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, repayEvery, repaymentFrequencyType,
                 defaultNumberOfRepayments, amortizationMethod, inArrearsTolerance);
     }
@@ -137,13 +137,13 @@ public class LoanProductRelatedDetailTestHelper {
 
         final AmortizationMethod amortizationMethod = AmortizationMethod.EQUAL_PRINCIPAL;
 
-        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
+        return createLoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
                 defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, repayEvery, repaymentFrequencyType,
                 defaultNumberOfRepayments, amortizationMethod, inArrearsTolerance);
     }
 
     private static LoanProductRelatedDetail createLoanProductRelatedDetail(final MonetaryCurrency currency,
-            final BigDecimal defaultPrincipal, final BigDecimal defaultNominalInterestRatePerPeriod,
+            final BigDecimal defaultPrincipal, final BigDecimal defaultDownpayment, final BigDecimal defaultNominalInterestRatePerPeriod,
             final PeriodFrequencyType interestPeriodFrequencyType, final BigDecimal defaultAnnualNominalInterestRate,
             final InterestMethod interestMethod, final InterestCalculationPeriodMethod interestCalculationPeriodMethod,
             final Integer repayEvery, final PeriodFrequencyType repaymentFrequencyType, final Integer defaultNumberOfRepayments,
@@ -159,7 +159,7 @@ public class LoanProductRelatedDetailTestHelper {
         final boolean isInterestRecalculationEnabled = false;
         final boolean considerPartialPeriodInterest = false;
 
-        return new LoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
+        return new LoanProductRelatedDetail(currency, defaultPrincipal, defaultDownpayment, defaultNominalInterestRatePerPeriod, interestPeriodFrequencyType,
                 defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, considerPartialPeriodInterest, repayEvery,
                 repaymentFrequencyType, defaultNumberOfRepayments, graceOnPrincipalPayment, graceOnInterestPayment, graceOnInterestCharged,
                 amortizationMethod, inArrearsTolerance, graceOnArrearsAgeing, daysInMonthType, daysInYearType, isInterestRecalculationEnabled);

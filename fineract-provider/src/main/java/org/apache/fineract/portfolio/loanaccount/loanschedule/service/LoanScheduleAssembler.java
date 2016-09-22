@@ -230,6 +230,9 @@ public class LoanScheduleAssembler {
         final BigDecimal principal = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("principal", element);
         final Money principalMoney = Money.of(currency, principal);
 
+        final BigDecimal downpayment = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("downpayment", element);
+        final Money downpaymentMoney = Money.of(currency, downpayment);
+
         final LocalDate expectedDisbursementDate = this.fromApiJsonHelper.extractLocalDateNamed("expectedDisbursementDate", element);
         final LocalDate repaymentsStartingFromDate = this.fromApiJsonHelper.extractLocalDateNamed("repaymentsStartingFromDate", element);
         LocalDate calculatedRepaymentsStartingFromDate = repaymentsStartingFromDate;

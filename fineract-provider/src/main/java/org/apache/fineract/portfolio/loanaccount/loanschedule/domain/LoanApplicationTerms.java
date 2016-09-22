@@ -1106,7 +1106,7 @@ public final class LoanApplicationTerms {
         final MonetaryCurrency currency = new MonetaryCurrency(this.currency.getCode(), this.currency.getDecimalPlaces(),
                 this.currency.getCurrencyInMultiplesOf());
 
-        return LoanProductRelatedDetail.createFrom(currency, this.principal.getAmount(), this.interestRatePerPeriod,
+        return LoanProductRelatedDetail.createFrom(currency, this.principal.getAmount(), null , this.interestRatePerPeriod,
                 this.interestRatePeriodFrequencyType, this.annualNominalInterestRate, this.interestMethod,
                 this.interestCalculationPeriodMethod, this.allowPartialPeriodInterestCalcualtion, this.repaymentEvery,
                 this.repaymentPeriodFrequencyType, this.numberOfRepayments, this.principalGrace, this.interestPaymentGrace,

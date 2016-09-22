@@ -56,6 +56,9 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     @Column(name = "principal_amount", scale = 6, precision = 19, nullable = true)
     private BigDecimal principal;
 
+    @Column(name = "downpayment_amount", scale = 6, precision = 19, nullable = true)
+    private BigDecimal downpayment;
+
     @Column(name = "nominal_interest_rate_per_period", scale = 6, precision = 19, nullable = true)
     private BigDecimal nominalInterestRatePerPeriod;
 
@@ -125,7 +128,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     @Column(name = "interest_recalculation_enabled")
     private boolean isInterestRecalculationEnabled;
 
-    public static LoanProductRelatedDetail createFrom(final MonetaryCurrency currency, final BigDecimal principal,
+    public static LoanProductRelatedDetail createFrom(final MonetaryCurrency currency, final BigDecimal principal, final BigDecimal downpayment,
             final BigDecimal nominalInterestRatePerPeriod, final PeriodFrequencyType interestRatePeriodFrequencyType,
             final BigDecimal nominalAnnualInterestRate, final InterestMethod interestMethod,
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final boolean allowPartialPeriodInterestCalcualtion,
@@ -134,7 +137,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance, final Integer graceOnArrearsAgeing,
             final Integer daysInMonthType, final Integer daysInYearType, final boolean isInterestRecalculationEnabled) {
 
-        return new LoanProductRelatedDetail(currency, principal, nominalInterestRatePerPeriod, interestRatePeriodFrequencyType,
+        return new LoanProductRelatedDetail(currency, principal, downpayment, nominalInterestRatePerPeriod, interestRatePeriodFrequencyType,
                 nominalAnnualInterestRate, interestMethod, interestCalculationPeriodMethod, allowPartialPeriodInterestCalcualtion,
                 repaymentEvery, repaymentPeriodFrequencyType, numberOfRepayments, graceOnPrincipalPayment, graceOnInterestPayment,
                 graceOnInterestCharged, amortizationMethod, inArrearsTolerance, graceOnArrearsAgeing, daysInMonthType, daysInYearType,
@@ -145,7 +148,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
         //
     }
 
-    public LoanProductRelatedDetail(final MonetaryCurrency currency, final BigDecimal defaultPrincipal,
+    public LoanProductRelatedDetail(final MonetaryCurrency currency, final BigDecimal defaultPrincipal, final BigDecimal defaultDownpayment,
             final BigDecimal defaultNominalInterestRatePerPeriod, final PeriodFrequencyType interestPeriodFrequencyType,
             final BigDecimal defaultAnnualNominalInterestRate, final InterestMethod interestMethod,
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final boolean allowPartialPeriodInterestCalcualtion,
@@ -155,6 +158,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
             final Integer daysInMonthType, final Integer daysInYearType, final boolean isInterestRecalculationEnabled) {
         this.currency = currency;
         this.principal = defaultPrincipal;
+        this.downpayment = defaultDownpayment;
         this.nominalInterestRatePerPeriod = defaultNominalInterestRatePerPeriod;
         this.interestPeriodFrequencyType = interestPeriodFrequencyType;
         this.annualNominalInterestRate = defaultAnnualNominalInterestRate;
@@ -193,13 +197,16 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     }
 
     @Override
-    public Money getPrincipal() {
-        return Money.of(this.currency, this.principal);
-    }
+    public Money getPrincipal() { return Money.of(this.currency, this.principal); }
 
     public void setPrincipal(BigDecimal principal) {
         this.principal = principal;
     }
+
+    @Override
+    public  Money getDownpayment() { return  Money.of(this.currency, this.downpayment); }
+
+    public void setDownpayment(BigDecimal downpayment) { this.downpayment = downpayment; }
 
     @Override
     public Integer graceOnInterestCharged() {

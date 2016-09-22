@@ -33,7 +33,9 @@ public interface LoanProductMinimumRepaymentScheduleRelatedDetail {
 	MonetaryCurrency getCurrency();
 	
 	Money getPrincipal();
-	
+
+	Money getDownpayment();
+
 	Integer graceOnInterestCharged();
 	
 	Integer graceOnInterestPayment();
