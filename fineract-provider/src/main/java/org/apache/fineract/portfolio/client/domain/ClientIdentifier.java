@@ -51,22 +51,27 @@ public class ClientIdentifier extends AbstractAuditableCustom<AppUser, Long> {
     @Column(name = "document_key", length = 1000)
     private String documentKey;
 
+    @Column(name = "document_status")
+    private String status;
+
     @Column(name = "description", length = 1000)
     private String description;
 
     public static ClientIdentifier fromJson(final Client client, final CodeValue documentType, final JsonCommand command) {
         final String documentKey = command.stringValueOfParameterNamed("documentKey");
         final String description = command.stringValueOfParameterNamed("description");
-        return new ClientIdentifier(client, documentType, documentKey, description);
+        final String status = command.stringValueOfParameterNamed("status");
+        return new ClientIdentifier(client, documentType, status, documentKey, description);
     }
 
     protected ClientIdentifier() {
         //
     }
 
-    private ClientIdentifier(final Client client, final CodeValue documentType, final String documentKey, final String description) {
+    private ClientIdentifier(final Client client, final CodeValue documentType, final String status, final String documentKey, final String description) {
         this.client = client;
         this.documentType = documentType;
+        this.status = StringUtils.defaultIfEmpty(status, null);
         this.documentKey = StringUtils.defaultIfEmpty(documentKey, null);
         this.description = StringUtils.defaultIfEmpty(description, null);
     }
@@ -85,6 +90,13 @@ public class ClientIdentifier extends AbstractAuditableCustom<AppUser, Long> {
             actualChanges.put(documentTypeIdParamName, newValue);
         }
 
+        final String statusParamName = "status";
+        if (command.isChangeInStringParameterNamed(statusParamName, this.status)) {
+            final String newValue = command.stringValueOfParameterNamed(statusParamName);
+            actualChanges.put(statusParamName, newValue);
+            this.status = StringUtils.defaultIfEmpty(newValue, null);
+        }
+
         final String documentKeyParamName = "documentKey";
         if (command.isChangeInStringParameterNamed(documentKeyParamName, this.documentKey)) {
             final String newValue = command.stringValueOfParameterNamed(documentKeyParamName);
@@ -101,6 +113,8 @@ public class ClientIdentifier extends AbstractAuditableCustom<AppUser, Long> {
 
         return actualChanges;
     }
+
+    public String status() { return this.status; }
 
     public String documentKey() {
         return this.documentKey;

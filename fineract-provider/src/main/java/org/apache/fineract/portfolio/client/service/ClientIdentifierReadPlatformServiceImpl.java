@@ -92,7 +92,7 @@ public class ClientIdentifierReadPlatformServiceImpl implements ClientIdentifier
 
         public String schema() {
             return "ci.id as id, ci.client_id as clientId, ci.document_type_id as documentTypeId, ci.document_key as documentKey,"
-                    + " ci.description as description, cv.code_value as documentType "
+                    + " ci.description as description, ci.document_status as status, cv.code_value as documentType "
                     + " from m_client_identifier ci, m_client c, m_office o, m_code_value cv"
                     + " where ci.client_id=c.id and c.office_id=o.id" + " and ci.document_type_id=cv.id"
                     + " and ci.client_id = ? and o.hierarchy like ? ";
@@ -104,13 +104,14 @@ public class ClientIdentifierReadPlatformServiceImpl implements ClientIdentifier
             final Long id = JdbcSupport.getLong(rs, "id");
             final Long clientId = JdbcSupport.getLong(rs, "clientId");
             final Long documentTypeId = JdbcSupport.getLong(rs, "documentTypeId");
+            final String status = rs.getString("status");
             final String documentKey = rs.getString("documentKey");
             final String description = rs.getString("description");
             final String documentTypeName = rs.getString("documentType");
 
             final CodeValueData documentType = CodeValueData.instance(documentTypeId, documentTypeName);
 
-            return ClientIdentifierData.singleItem(id, clientId, documentType, documentKey, description);
+            return ClientIdentifierData.singleItem(id, clientId, documentType, status, documentKey, description);
         }
 
     }

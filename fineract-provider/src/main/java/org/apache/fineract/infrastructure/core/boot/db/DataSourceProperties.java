@@ -45,7 +45,7 @@ public class DataSourceProperties extends PoolProperties {
     @Value("${" + PORT + ":3306}")
     private volatile @NotNull int port;
 
-    @Value("${" + HOST + ":localhost}")
+    @Value("${" + HOST + ":172.17.0.2}")
     private volatile @NotNull String hostname;
 
     @Value("${" + DB + ":mifosplatform-tenants}")
@@ -109,7 +109,7 @@ public class DataSourceProperties extends PoolProperties {
 		if (StringUtils.hasText(url)) {
 			throw new IllegalStateException();
 		}
-		return jdbcProtocol + ":" + jdbcSubprotocol + "://" + getHost() + ":" + getPort() + "/" + getDBName();
+		return jdbcProtocol + ":" + jdbcSubprotocol + "://" + getHost() + ":" + getPort() + "/" + getDBName() + "?zeroDateTimeBehavior=convertToNull";
 	}
 
 	public String getHost() {
